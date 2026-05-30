@@ -82,6 +82,15 @@
       color: var(--ink);
     }
 
+    /* Illustration link styling: consistent color and italic hyperlink look */
+    .illustration-link {
+      color: #c39d6f;
+      font-style: italic;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
 
     /* ---------------- NAV ---------------- */
     .nav-toggle {
@@ -922,9 +931,10 @@
           <p class="schedule-entry-copy">
             The big moment we've been waiting for!
           </p>
-          <p class="schedule-entry-copy">
-            Wardrobe ideas:
+          <p class="schedule-entry-copy" style="position:relative; display:inline-flex; flex-wrap:wrap; align-items:center; gap:0.25rem;">
+            Wardrobe ideas: <a href="#" id="wardrobeTrigger" class="illustration-link" onclick="openWardrobeModal(); return false;">illustration here</a>
           </p>
+          <!-- (Preview overlay removed - replaced by wardrobe modal) -->
           <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-top:1rem;">
             <span title="Rich Olive" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #6b6a2b 0%, #7c7d33 50%, #5b5b21 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.14), 0 8px 20px rgba(0,0,0,0.2);"></span>
             <span title="Dusty Coral Pink" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #d48d84 0%, #c7756e 50%, #a45b56 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.16), 0 8px 20px rgba(0,0,0,0.18);"></span>
@@ -943,7 +953,7 @@
             Dinner, drinks & dancing to follow!
           </p>
           <p class="schedule-entry-copy">
-            Wardrobe ideas:
+            Wardrobe ideas: <a href="#" id="cocktailWardrobeTrigger" class="illustration-link" style="margin-left:0.4rem;">illustration here</a>
           </p>
           <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-top:1rem;">
             <span title="Rich burgundy velvet" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 18% 18%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #8e1f2e 0%, #6f1723 55%, #9d233b 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.15), 0 8px 20px rgba(0,0,0,0.2);"></span>
@@ -1100,6 +1110,25 @@
     <div class="rsvp-card" id="rsvpCard" role="dialog" aria-modal="true">
       <button class="rsvp-close" id="rsvpClose" type="button">✕</button>
       <div id="rsvpStep"></div>
+    </div>
+  </div>
+  
+  <!-- WARDROBE Modal (RSVP-style) -->
+  <div class="rsvp-modal" id="wardrobeModal" aria-hidden="true">
+    <div class="rsvp-card" id="wardrobeCard" role="dialog" aria-modal="true">
+      <button class="rsvp-close" id="wardrobeClose" type="button">✕</button>
+      <div id="wardrobeContent" style="text-align:center; padding:6px 0 0 0;">
+        <img src="./images/Wedding-wardrobe-illustration.png" alt="Wedding wardrobe illustration" style="max-width:100%; height:auto; border-radius:6px; display:block; margin:0 auto;" />
+      </div>
+    </div>
+  </div>
+  <!-- COCKTAIL PARTY WARDROBE Modal (RSVP-style) -->
+  <div class="rsvp-modal" id="cocktailWardrobeModal" aria-hidden="true">
+    <div class="rsvp-card" id="cocktailWardrobeCard" role="dialog" aria-modal="true">
+      <button class="rsvp-close" id="cocktailWardrobeClose" type="button">✕</button>
+      <div id="cocktailWardrobeContent" style="text-align:center; padding:6px 0 0 0;">
+        <img src="./images/Cocktail-Party-wardrobe-illustration.png" alt="Cocktail party wardrobe illustration" style="max-width:100%; height:auto; border-radius:6px; display:block; margin:0 auto;" />
+      </div>
     </div>
   </div>
   </div>
@@ -1584,6 +1613,36 @@
       elements.rsvpModal.setAttribute('aria-hidden', 'true');
     }
 
+    /* Wardrobe modal controls (mirror RSVP behavior) */
+    function openWardrobeModal() {
+      const modal = document.getElementById('wardrobeModal');
+      if (!modal) return;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeWardrobeModal() {
+      const modal = document.getElementById('wardrobeModal');
+      if (!modal) return;
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    /* Cocktail party wardrobe modal controls (mirror RSVP behavior) */
+    function openCocktailWardrobeModal() {
+      const modal = document.getElementById('cocktailWardrobeModal');
+      if (!modal) return;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeCocktailWardrobeModal() {
+      const modal = document.getElementById('cocktailWardrobeModal');
+      if (!modal) return;
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
     function extractDesktopFormData() {
       const formData = new FormData(elements.desktopRsvpForm);
 
@@ -1662,6 +1721,46 @@
         });
       }
 
+      /* Wardrobe modal backdrop close */
+      const wardrobeModalEl = document.getElementById('wardrobeModal');
+      const wardrobeCloseEl = document.getElementById('wardrobeClose');
+
+      if (wardrobeModalEl) {
+        wardrobeModalEl.addEventListener('click', (event) => {
+          if (event.target === wardrobeModalEl) {
+            closeWardrobeModal();
+          }
+        });
+      }
+
+      if (wardrobeCloseEl) {
+        wardrobeCloseEl.addEventListener('click', closeWardrobeModal);
+      }
+
+      /* Cocktail party wardrobe: trigger, backdrop and close button */
+      const cocktailTrigger = document.getElementById('cocktailWardrobeTrigger');
+      const cocktailModalEl = document.getElementById('cocktailWardrobeModal');
+      const cocktailCloseEl = document.getElementById('cocktailWardrobeClose');
+
+      if (cocktailTrigger) {
+        cocktailTrigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          openCocktailWardrobeModal();
+        });
+      }
+
+      if (cocktailModalEl) {
+        cocktailModalEl.addEventListener('click', (event) => {
+          if (event.target === cocktailModalEl) {
+            closeCocktailWardrobeModal();
+          }
+        });
+      }
+
+      if (cocktailCloseEl) {
+        cocktailCloseEl.addEventListener('click', closeCocktailWardrobeModal);
+      }
+
       updateRsvpFabPulse();
       window.addEventListener('scroll', updateRsvpFabPulse, { passive: true });
     }
@@ -1672,6 +1771,7 @@
     initializeHeroParallax();
     initializeDesktopRsvpForm();
     initializeRsvpControls();
+    // no separate init needed for wardrobe; wired into initializeRsvpControls
   </script>
 
 </body>
