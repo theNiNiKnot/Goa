@@ -91,6 +91,44 @@
       cursor: pointer;
     }
 
+    .color-swatch {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .color-swatch:focus-visible {
+      box-shadow: 0 0 0 3px rgba(195, 157, 111, 0.35);
+    }
+
+    .color-swatch-label {
+      position: absolute;
+      left: 50%;
+      bottom: -2.5rem;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.98);
+      color: #5c4033;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      animation: swatchLabelFadeIn 0.18s ease forwards;
+      z-index: 10;
+    }
+
+    @keyframes swatchLabelFadeIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
 
     /* ---------------- NAV ---------------- */
     .nav-toggle {
@@ -863,7 +901,7 @@
 
   <div id="mainContent" class="site-content">
   <!-- NAV -->
-  <div class="nav-toggle" id="navToggle">☰</div>
+  <div class="nav-toggle" id="navToggle">?</div>
   <button class="rsvp-fab" id="rsvpFab" type="button">RSVP</button>
 
   <nav class="nav" id="nav">
@@ -881,7 +919,7 @@
     <section class="hero">
       <div class="hero-content">
         <h1>Niyeti & Nikhil</h1>
-        <p>December 15-17, 2026 • Goa, India</p>
+        <p>December 15-17, 2026 � Goa, India</p>
       </div>
       <div class="scroll" aria-hidden="true">&#9662;</div>
     </section>
@@ -891,7 +929,7 @@
       <h2>How We Met</h2>
       <div class="date">October 2020</div>
       <p>
-        We met during our Master’s studies in a beautiful German town, a place with snowy winters and summers kissed by golden sunshine. Our story began as a friendship and slowly grew into something more, until we realized that life felt warmer, fuller, and complete together. Five years, shared journeys, and countless memories later, here we are, planning our forever.
+        We met during our Master�s studies in a beautiful German town, a place with snowy winters and summers kissed by golden sunshine. Our story began as a friendship and slowly grew into something more, until we realized that life felt warmer, fuller, and complete together. Five years, shared journeys, and countless memories later, here we are, planning our forever.
       </p>
     </section>
     <!-- PROPOSAL
@@ -899,7 +937,7 @@
       <h2>The Proposal</h2>
       <div class="date">December 2025</div>
       <p>
-        What started as a weekend trip from Munich to Dolomites turned into a moment we’ll never forget. At sunset, on a snowy cliff overlooking the mountains, we walked into a surprise Nikhil, with the help of our friends, had set up. Somewhere between happy shock, laughter, and the sky turning gold, a knee was bent and a very enthusiastic yes was said, marking the beginning of an event celebrating love, family, and togetherness.
+        What started as a weekend trip from Munich to Dolomites turned into a moment we�ll never forget. At sunset, on a snowy cliff overlooking the mountains, we walked into a surprise Nikhil, with the help of our friends, had set up. Somewhere between happy shock, laughter, and the sky turning gold, a knee was bent and a very enthusiastic yes was said, marking the beginning of an event celebrating love, family, and togetherness.
       </p>
     </section>
     -->
@@ -912,22 +950,22 @@
       <div class="schedule-list">
 
         <div class="schedule-entry">
-          <h3 class="schedule-entry-title">December 15 • 2:00 PM</h3>
-          <p class="schedule-entry-label">✨ Check-in at the Resort</p>
+          <h3 class="schedule-entry-title">December 15 � 2:00 PM</h3>
+          <p class="schedule-entry-label">? Check-in at the Resort</p>
           <p class="schedule-entry-copy schedule-entry-copy-spaced">
             Nanu Beach Resort & Spa<br>
             Betalbatim, Goa<br>
             Nearest airport: Dabolim Airport (GOI)<br>
             <a href="https://maps.app.goo.gl/8xG4cxwQ5vhLMVi39" class="content-link" target="_blank" rel="noopener">Visit Hotel Website</a>
           </p>
-          <p class="schedule-entry-label">🎉 Evening: Devgon</p>
+          <p class="schedule-entry-label">?? Evening: Devgon</p>
           <p class="schedule-entry-copy">
             Followed by sunset on the beach, music, dinner, and time with family and friends.          </p>
         </div>
 
         <div class="schedule-entry">
           <h3 class="schedule-entry-title">December 16</h3>
-          <p class="schedule-entry-label">💍 9:00 AM - Wedding Ceremony</p>
+          <p class="schedule-entry-label">?? 9:00 AM - Wedding Ceremony</p>
           <p class="schedule-entry-copy">
             The big moment we've been waiting for!
           </p>
@@ -936,19 +974,19 @@
           </p>
           <!-- (Preview overlay removed - replaced by wardrobe modal) -->
           <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-top:1rem;">
-            <span title="Rich Olive" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #6b6a2b 0%, #7c7d33 50%, #5b5b21 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.14), 0 8px 20px rgba(0,0,0,0.2);"></span>
-            <span title="Dusty Coral Pink" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #d48d84 0%, #c7756e 50%, #a45b56 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.16), 0 8px 20px rgba(0,0,0,0.18);"></span>
-            <span title="Champagne" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 18%), linear-gradient(145deg, #eadfb6 0%, #d7c78f 45%, #f1e5b0 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.32), 0 8px 20px rgba(0,0,0,0.14);"></span>
-            <span title="Lavender" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #9e89b9 0%, #b39fd8 50%, #7e6fae 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.14), 0 8px 20px rgba(0,0,0,0.16);"></span>
-            <span title="Aqua Blue" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #5dc7d9 0%, #48b3c5 50%, #318f9f 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.14), 0 8px 20px rgba(0,0,0,0.18);"></span>
-            <span title="Marigold" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 18%), linear-gradient(145deg, #f3a83d 0%, #e58c26 50%, #c3721b 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.18), 0 8px 20px rgba(0,0,0,0.18);"></span>
-            <span title="Sand Beige" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #d5c2a5 0%, #cbb396 50%, #b79a7e 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.28), 0 8px 20px rgba(0,0,0,0.16);"></span>
+            <span class="color-swatch" title="Rich Olive" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #6b6a2b 0%, #7c7d33 50%, #5b5b21 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.14), 0 8px 20px rgba(0,0,0,0.2);"></span>
+            <span class="color-swatch" title="Dusty Coral Pink" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #d48d84 0%, #c7756e 50%, #a45b56 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.16), 0 8px 20px rgba(0,0,0,0.18);"></span>
+            <span class="color-swatch" title="Champagne" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 18%), linear-gradient(145deg, #eadfb6 0%, #d7c78f 45%, #f1e5b0 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.32), 0 8px 20px rgba(0,0,0,0.14);"></span>
+            <span class="color-swatch" title="Lavender" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #9e89b9 0%, #b39fd8 50%, #7e6fae 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.14), 0 8px 20px rgba(0,0,0,0.16);"></span>
+            <span class="color-swatch" title="Aqua Blue" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #5dc7d9 0%, #48b3c5 50%, #318f9f 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.14), 0 8px 20px rgba(0,0,0,0.18);"></span>
+            <span class="color-swatch" title="Marigold" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 18%), linear-gradient(145deg, #f3a83d 0%, #e58c26 50%, #c3721b 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.18), 0 8px 20px rgba(0,0,0,0.18);"></span>
+            <span class="color-swatch" title="Sand Beige" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #d5c2a5 0%, #cbb396 50%, #b79a7e 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.28), 0 8px 20px rgba(0,0,0,0.16);"></span>
           </div>
           <p class="schedule-entry-copy-tall"></p>
           <p class="schedule-entry-copy-tall"></p>
           <p class="schedule-entry-copy-tall"></p>
           
-          <p class="schedule-entry-label">🍹 6:00 PM - Cocktail Party</p>
+          <p class="schedule-entry-label">?? 6:00 PM - Cocktail Party</p>
           <p class="schedule-entry-copy">
             Dinner, drinks & dancing to follow!
           </p>
@@ -956,20 +994,20 @@
             Wardrobe ideas: <a href="#" id="cocktailWardrobeTrigger" class="illustration-link" style="margin-left:0.4rem;">illustration here</a>
           </p>
           <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-top:1rem;">
-            <span title="Rich burgundy velvet" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 18% 18%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #8e1f2e 0%, #6f1723 55%, #9d233b 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.15), 0 8px 20px rgba(0,0,0,0.2);"></span>
-            <span title="Textured gold cloth" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 18%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 18%), linear-gradient(135deg, #d4b24d 0%, #b78d2f 42%, #e1c27a 62%, #b78d2f 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.18), 0 8px 20px rgba(0,0,0,0.2);"></span>
-            <span title="Matte Navy Blue" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 25% 20%, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 14%), linear-gradient(135deg, #2f4b78 0%, #325a87 55%, #1d3c60 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.12), 0 8px 20px rgba(0,0,0,0.22);"></span>
-            <span title="Matte Emerald Green" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 22%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 14%), linear-gradient(145deg, #1a5f49 0%, #1d6b4f 55%, #20856b 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.1), 0 8px 20px rgba(0,0,0,0.22);"></span>
-            <span title="Glossy Black Satin" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 25% 20%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 10%), linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 45%, #080808 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.05), 0 8px 20px rgba(0,0,0,0.3);"></span>
-            <span title="Textured Silver Mesh" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 22% 20%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 18%), linear-gradient(135deg, #e1e1e1 0%, #c4c4c4 30%, #a9a9a9 55%, #d7d7d7 80%, #b8b8b8 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.12), 0 8px 20px rgba(0,0,0,0.18);"></span>
-            <span title="Matte Cream Organza" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 14%), linear-gradient(145deg, #e8dbc8 0%, #f3ead7 55%, #d9c8ae 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.35), 0 8px 20px rgba(0,0,0,0.12);"></span>
-            <span title="Warm Tan Chiffon" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 22% 18%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 14%), linear-gradient(145deg, #b68964 0%, #c49b7b 45%, #a77a54 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.15), 0 8px 20px rgba(0,0,0,0.18);"></span>
+            <span class="color-swatch" title="Rich burgundy velvet" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 18% 18%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 16%), linear-gradient(145deg, #8e1f2e 0%, #6f1723 55%, #9d233b 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.15), 0 8px 20px rgba(0,0,0,0.2);"></span>
+            <span class="color-swatch" title="Textured gold cloth" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 18%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 18%), linear-gradient(135deg, #d4b24d 0%, #b78d2f 42%, #e1c27a 62%, #b78d2f 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.18), 0 8px 20px rgba(0,0,0,0.2);"></span>
+            <span class="color-swatch" title="Matte Navy Blue" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 25% 20%, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 14%), linear-gradient(135deg, #2f4b78 0%, #325a87 55%, #1d3c60 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.12), 0 8px 20px rgba(0,0,0,0.22);"></span>
+            <span class="color-swatch" title="Matte Emerald Green" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 22%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 14%), linear-gradient(145deg, #1a5f49 0%, #1d6b4f 55%, #20856b 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.1), 0 8px 20px rgba(0,0,0,0.22);"></span>
+            <span class="color-swatch" title="Glossy Black Satin" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 25% 20%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 10%), linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 45%, #080808 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.05), 0 8px 20px rgba(0,0,0,0.3);"></span>
+            <span class="color-swatch" title="Textured Silver Mesh" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 22% 20%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 18%), linear-gradient(135deg, #e1e1e1 0%, #c4c4c4 30%, #a9a9a9 55%, #d7d7d7 80%, #b8b8b8 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.12), 0 8px 20px rgba(0,0,0,0.18);"></span>
+            <span class="color-swatch" title="Matte Cream Organza" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 14%), linear-gradient(145deg, #e8dbc8 0%, #f3ead7 55%, #d9c8ae 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.35), 0 8px 20px rgba(0,0,0,0.12);"></span>
+            <span class="color-swatch" title="Warm Tan Chiffon" style="width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 22% 18%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 14%), linear-gradient(145deg, #b68964 0%, #c49b7b 45%, #a77a54 100%); box-shadow:0 0 0 1px rgba(255,255,255,0.15), 0 8px 20px rgba(0,0,0,0.18);"></span>
           </div>
         </div>
 
         <div class="schedule-entry">
-          <h3 class="schedule-entry-title">December 17 • 11:00 AM</h3>
-          <p class="schedule-entry-label">🌅 Check-out from Resort</p>
+          <h3 class="schedule-entry-title">December 17 � 11:00 AM</h3>
+          <p class="schedule-entry-label">?? Check-out from Resort</p>
           <p class="schedule-entry-copy schedule-entry-copy-top">
             We will keep updating the event flow and timings here for all days...
           </p>
@@ -1064,7 +1102,7 @@
 
     <footer>
       <img src="./images/Website-wedding-logo.png" alt="Wedding logo" class="footer-logo">
-      Made with love • Ni & Ni
+      Made with love � Ni & Ni
     </footer>
     </div>
   </div>
@@ -1108,7 +1146,7 @@
   <!-- RSVP Modal -->
   <div class="rsvp-modal" id="rsvpModal" aria-hidden="true">
     <div class="rsvp-card" id="rsvpCard" role="dialog" aria-modal="true">
-      <button class="rsvp-close" id="rsvpClose" type="button">✕</button>
+      <button class="rsvp-close" id="rsvpClose" type="button">?</button>
       <div id="rsvpStep"></div>
     </div>
   </div>
@@ -1116,7 +1154,7 @@
   <!-- WARDROBE Modal (RSVP-style) -->
   <div class="rsvp-modal" id="wardrobeModal" aria-hidden="true">
     <div class="rsvp-card" id="wardrobeCard" role="dialog" aria-modal="true">
-      <button class="rsvp-close" id="wardrobeClose" type="button">✕</button>
+      <button class="rsvp-close" id="wardrobeClose" type="button">?</button>
       <div id="wardrobeContent" style="text-align:center; padding:6px 0 0 0;">
         <img src="./images/Wedding-wardrobe-illustration.png" alt="Wedding wardrobe illustration" style="max-width:100%; height:auto; border-radius:6px; display:block; margin:0 auto;" />
       </div>
@@ -1125,7 +1163,7 @@
   <!-- COCKTAIL PARTY WARDROBE Modal (RSVP-style) -->
   <div class="rsvp-modal" id="cocktailWardrobeModal" aria-hidden="true">
     <div class="rsvp-card" id="cocktailWardrobeCard" role="dialog" aria-modal="true">
-      <button class="rsvp-close" id="cocktailWardrobeClose" type="button">✕</button>
+      <button class="rsvp-close" id="cocktailWardrobeClose" type="button">?</button>
       <div id="cocktailWardrobeContent" style="text-align:center; padding:6px 0 0 0;">
         <img src="./images/Cocktail-Party-wardrobe-illustration.png" alt="Cocktail party wardrobe illustration" style="max-width:100%; height:auto; border-radius:6px; display:block; margin:0 auto;" />
       </div>
@@ -1643,6 +1681,70 @@
       modal.setAttribute('aria-hidden', 'true');
     }
 
+    const swatchTooltipTimers = new WeakMap();
+
+    function removeColorSwatchLabel(swatch) {
+      const timeoutId = swatchTooltipTimers.get(swatch);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        swatchTooltipTimers.delete(swatch);
+      }
+      const existing = swatch.querySelector('.color-swatch-label');
+      if (existing) {
+        existing.remove();
+      }
+    }
+
+    function showColorSwatchLabel(swatch) {
+      if (!swatch) {
+        return;
+      }
+
+      removeColorSwatchLabel(swatch);
+      const labelText = swatch.getAttribute('title');
+      if (!labelText) {
+        return;
+      }
+
+      const label = document.createElement('span');
+      label.className = 'color-swatch-label';
+      label.textContent = labelText;
+      swatch.appendChild(label);
+
+      const timeoutId = window.setTimeout(() => {
+        removeColorSwatchLabel(swatch);
+      }, 1800);
+
+      swatchTooltipTimers.set(swatch, timeoutId);
+    }
+
+    function initializeColorSwatches() {
+      const swatches = document.querySelectorAll('.color-swatch');
+
+      swatches.forEach((swatch) => {
+        swatch.setAttribute('role', 'button');
+        swatch.setAttribute('tabindex', '0');
+        if (!swatch.hasAttribute('aria-label')) {
+          const labelText = swatch.getAttribute('title');
+          if (labelText) {
+            swatch.setAttribute('aria-label', labelText);
+          }
+        }
+
+        swatch.addEventListener('click', (event) => {
+          event.preventDefault();
+          showColorSwatchLabel(swatch);
+        });
+
+        swatch.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            showColorSwatchLabel(swatch);
+          }
+        });
+      });
+    }
+
     function extractDesktopFormData() {
       const formData = new FormData(elements.desktopRsvpForm);
 
@@ -1771,11 +1873,13 @@
     initializeHeroParallax();
     initializeDesktopRsvpForm();
     initializeRsvpControls();
+    initializeColorSwatches();
     // no separate init needed for wardrobe; wired into initializeRsvpControls
   </script>
 
 </body>
 </html>
+
 
 
 
