@@ -352,6 +352,10 @@
       color: var(--sage);
     }
 
+    section[id] {
+      scroll-margin-top: 24px;
+    }
+
     /* ---------------- SPLASH SCREEN ---------------- */
     .splash-screen {
       position: fixed;
@@ -905,9 +909,9 @@
   <button class="rsvp-fab" id="rsvpFab" type="button">RSVP</button>
 
   <nav class="nav" id="nav">
-    <a href="#couple">Home</a>
+    <a href="#top" class="nav-home-link">Home</a>
     <a href="#how">How We Met</a>
-    <a href="#events">Schedule of Events</a>
+    <a href="#schedule">Schedule of Events</a>
     <a href="#things">Things To Do</a>
     <a href="#accommodations">Accommodations</a>
     <a href="#faq">FAQ</a>
@@ -916,7 +920,7 @@
   <!-- LEFT PANE (SCROLLABLE) -->
   <div class="pane-left">
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="top">
       <div class="hero-content">
         <h1>Niyeti & Nikhil</h1>
         <p>December 15-17, 2026 • Goa, India</p>
@@ -1297,6 +1301,32 @@
      * The side navigation is intentionally lightweight. We only preserve its
      * current open, close-on-link, and close-on-outside-click behavior.
      */
+    function scrollToSectionByHash(hash) {
+      const cleanHash = (hash || '').replace('#', '');
+      const targetId = cleanHash === 'events' ? 'schedule' : cleanHash;
+      const targetElement = targetId ? document.getElementById(targetId) : null;
+
+      if (!targetElement) {
+        return;
+      }
+
+      if (targetId === 'top') {
+        try {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (error) {
+          window.scrollTo(0, 0);
+        }
+        return;
+      }
+
+      try {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (error) {
+        const top = targetElement.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top, behavior: 'auto' });
+      }
+    }
+
     function initializeNavigation() {
       const { nav, navLinks, navToggle } = elements;
 
@@ -1305,7 +1335,16 @@
       }
 
       navToggle.addEventListener('click', toggleNavigation);
-      navLinks.forEach((link) => link.addEventListener('click', closeNavigation));
+
+      navLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          closeNavigation();
+
+          const href = link.getAttribute('href') || '';
+          scrollToSectionByHash(href);
+        });
+      });
 
       document.addEventListener('click', (event) => {
         if (!nav.contains(event.target) && !navToggle.contains(event.target)) {
