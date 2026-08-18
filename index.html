@@ -263,6 +263,11 @@
       gap: 10px;
     }
 
+    /* add vertical spacing when the previous element is the guests control */
+    .guests-control + .rsvp-actions {
+      margin-top: 22px;
+    }
+
     .rsvp-actions button:not(.rsvp-close) {
       width: auto;
       flex: 1;
@@ -705,7 +710,7 @@
 
     .schedule-entry-title {
       font-family: 'Lobster Two', cursive;
-      font-size: 28px;
+        font-size: 32px;
       margin-bottom: 15px;
     }
 
@@ -721,7 +726,7 @@
       margin-bottom: 10px;
     }
 
-    .schedule-entry-copy {
+      font-size: 18px;
       opacity: 0.95;
     }
 
@@ -889,6 +894,100 @@
       .pane-right {
         background-attachment: scroll;
       }
+    }
+
+    /* Quantity selector styling: remove native spinners and style +/- controls */
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .guests-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .guests-control .guests-decrement,
+    .guests-control .guests-increment {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      border: 1px solid rgba(0,0,0,0.06);
+      cursor: pointer;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--rsvp-text);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      line-height: 1;
+      padding: 0;
+    }
+
+    .guests-control .guests-decrement:hover,
+    .guests-control .guests-increment:hover {
+      background: #e5c6a2;
+    }
+
+    .guests-control .guests-input {
+      width: 56px;
+      height: 52px;
+      border: none;
+      text-align: center;
+      font-size: 24px;
+      background: transparent;
+      -moz-appearance: textfield;
+      -webkit-appearance: none;
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: normal;
+      box-sizing: border-box;
+      color: #111;
+      padding: 0;
+      margin: 0;
+    }
+
+    .guests-control .guests-input::placeholder {
+      color: #aaa;
+    }
+
+    .guests-control .guests-input:focus {
+      outline: none;
+    }
+
+    .guests-control button:active {
+      transform: translateY(1px);
+    }
+    /* Strong, specific override to force circular +/- buttons inside the RSVP modal/card.
+       Targets multiple possible DOM paths and uses !important to win against global RSVP button rules. */
+    .rsvp-card .rsvp-box .guests-control .guests-decrement,
+    .rsvp-card .rsvp-box .guests-control .guests-increment,
+    .rsvp-card .guests-control .guests-decrement,
+    .rsvp-card .guests-control .guests-increment {
+      width: 40px !important;
+      height: 40px !important;
+      border-radius: 999px !important;
+      padding: 0 !important;
+      font-size: 36px !important;
+      font-weight: 700 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #f5f5f5 !important;
+      border: 1px solid rgba(0,0,0,0.06) !important;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06) !important;
+      line-height: 1 !important;
+      color: var(--rsvp-text) !important;
     }
   </style>
 </head>
@@ -1124,6 +1223,11 @@
         <div class="rsvp-box">
           <form name="submit-to-google-sheet">
             <input name="Name" placeholder="Full name" required />
+            <div class="guests-control">
+              <button type="button" class="guests-decrement" aria-label="Decrease guests">−</button>
+              <input name="Guests" id="desktopGuests" class="guests-input" type="number" min="0" step="1" inputmode="numeric" pattern="\d*" placeholder="0" required />
+              <button type="button" class="guests-increment" aria-label="Increase guests">+</button>
+            </div>
             <div class="rsvp-options" role="group" aria-label="Attendance confirmation">
               <label class="rsvp-option">
                 <input type="checkbox" name="AttendingConfirm" value="Will attend!" required />
@@ -1215,6 +1319,7 @@
       attendingConfirm: '',
       mealPreference: '',
       alcohol: '',
+      guests: '',
       songRequest: '',
       note: ''
     };
@@ -1421,6 +1526,8 @@
         'Meal Preference': formState.mealPreference || '',
         'Would you like to drink alcohol': formState.alcohol || '',
         'Song Request': formState.songRequest || '',
+        Guests: formState.guests || '',
+        'Including you, how many of your family members will be joining us?': formState.guests || '',
         'Note for Couple': formState.note || ''
       };
     }
@@ -1558,6 +1665,21 @@
       },
       {
         title: 'RSVP',
+        text: 'Including you, how many of your family members will be joining us?',
+        input: `
+          <div class="guests-control">
+            <button type="button" class="guests-decrement" aria-label="Decrease guests">−</button>
+            <input id="rsvpGuests" name="Guests" class="guests-input" type="number" min="0" step="1" inputmode="numeric" pattern="\\d*" placeholder="0" required />
+            <button type="button" class="guests-increment" aria-label="Increase guests">+</button>
+          </div>
+        `,
+        getValue: () => readTrimmedInputValue('rsvpGuests'),
+        setValue: (value) => {
+          rsvpSubmissionState.guests = value;
+        }
+      },
+      {
+        title: 'RSVP',
         text: 'Which song will get you out on the dance floor? - leave your song request. (optional)',
         input: '<input id="rsvpSong" name="SongRequest" placeholder="Song request" />',
         getValue: () => readTrimmedInputValue('rsvpSong'),
@@ -1631,15 +1753,54 @@
         ? `<button type="button" id="rsvpSkip">${currentRsvpStepIndex === rsvpSteps.length - 1 ? 'Skip and Submit' : 'Skip'}</button>`
         : '';
 
+      const nextLabel = currentRsvpStepIndex === rsvpSteps.length - 1 ? 'Submit' : 'Next';
+
       rsvpStep.innerHTML = `
         <h3>${step.title}</h3>
         <p>${step.text}</p>
         ${step.input}
         <div class="rsvp-actions">
-          <button type="button" id="rsvpNext">Next</button>
+          <button type="button" id="rsvpNext">${nextLabel}</button>
           ${skipButtonMarkup}
         </div>
       `;
+
+      // If this step contains a guests input, ensure it cannot go below 0
+      const modalGuestsInput = document.getElementById('rsvpGuests');
+      if (modalGuestsInput) {
+        modalGuestsInput.addEventListener('input', () => {
+          if (modalGuestsInput.value === '') return;
+          const n = parseInt(modalGuestsInput.value, 10);
+          if (isNaN(n) || n < 0) {
+            modalGuestsInput.value = '0';
+          }
+        });
+
+        modalGuestsInput.addEventListener('keydown', (e) => {
+          // prevent non-numeric entry like 'e', '+', or '-'
+          if (e.key === 'e' || e.key === '+' || e.key === '-') {
+            e.preventDefault();
+          }
+        });
+
+        // wire increment/decrement buttons for modal guests control
+        const modalDecrement = rsvpStep.querySelector('.guests-decrement');
+        const modalIncrement = rsvpStep.querySelector('.guests-increment');
+
+        function adjustModalGuests(delta) {
+          const current = modalGuestsInput.value === '' ? 0 : parseInt(modalGuestsInput.value, 10) || 0;
+          const next = Math.max(0, current + delta);
+          modalGuestsInput.value = String(next);
+        }
+
+        if (modalDecrement) {
+          modalDecrement.addEventListener('click', () => adjustModalGuests(-1));
+        }
+
+        if (modalIncrement) {
+          modalIncrement.addEventListener('click', () => adjustModalGuests(1));
+        }
+      }
 
       MUTUALLY_EXCLUSIVE_GROUPS.forEach((groupName) => enforceSingleSelection(rsvpStep, groupName));
 
@@ -1793,6 +1954,11 @@
         attendingConfirm: (formData.get('AttendingConfirm') || '').toString().trim(),
         mealPreference: (formData.get('MealPreference') || '').toString().trim(),
         alcohol: (formData.get('Alcohol') || '').toString().trim(),
+        guests: (function(){
+          const raw = formData.get('Guests') || '';
+          const parsed = parseInt(raw.toString().trim(), 10);
+          return !isNaN(parsed) ? Math.max(0, parsed).toString() : '';
+        })(),
         songRequest: (formData.get('SongRequest') || '').toString().trim(),
         note: (formData.get('Note') || '').toString().trim()
       };
@@ -1907,12 +2073,53 @@
       window.addEventListener('scroll', updateRsvpFabPulse, { passive: true });
     }
 
+    function initializeGuestsControls() {
+      const desktopGuests = document.getElementById('desktopGuests');
+      if (desktopGuests) {
+        desktopGuests.addEventListener('input', () => {
+          if (desktopGuests.value === '') return;
+          const n = parseInt(desktopGuests.value, 10);
+          if (isNaN(n) || n < 0) {
+            desktopGuests.value = '0';
+          }
+        });
+
+        desktopGuests.addEventListener('keydown', (e) => {
+          if (e.key === 'e' || e.key === '+' || e.key === '-') {
+            e.preventDefault();
+          }
+        });
+
+        // Prevent accidental wheel changes
+        desktopGuests.addEventListener('wheel', (e) => {
+          desktopGuests.blur();
+        });
+
+        // wire desktop increment/decrement buttons
+        const desktopWrapper = desktopGuests.closest('.guests-control');
+        if (desktopWrapper) {
+          const dec = desktopWrapper.querySelector('.guests-decrement');
+          const inc = desktopWrapper.querySelector('.guests-increment');
+
+          const adjustDesktopGuests = (delta) => {
+            const raw = desktopGuests.value === '' ? 0 : parseInt(desktopGuests.value, 10) || 0;
+            const next = Math.max(0, raw + delta);
+            desktopGuests.value = String(next);
+          };
+
+          if (dec) dec.addEventListener('click', () => adjustDesktopGuests(-1));
+          if (inc) inc.addEventListener('click', () => adjustDesktopGuests(1));
+        }
+      }
+    }
+
     initializeSplashScreen();
     initializeSplashPlaybackFallback();
     initializeNavigation();
     initializeHeroParallax();
     initializeDesktopRsvpForm();
     initializeRsvpControls();
+    initializeGuestsControls();
     initializeColorSwatches();
     // no separate init needed for wardrobe; wired into initializeRsvpControls
   </script>
